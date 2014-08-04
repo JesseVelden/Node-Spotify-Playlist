@@ -3,7 +3,8 @@ Node.js - Spotify Playlist Data
 
 Get all data from a **public** Spotify Playlist without authentication. Based on [node-spotify-data](https://github.com/MiniGod/node-spotify-data).
 
-**Dependencies**
+##### Dependencies
+
 This project depends on [restler](https://github.com/danwrong/restler) to make HTTP(S) requests, [spotify-uri](https://github.com/TooTallNate/spotify-uri) for converting Spotify URI's and [cheerio](https://github.com/cheeriojs/cheerio).
 
 ## Install
