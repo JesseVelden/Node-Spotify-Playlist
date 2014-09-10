@@ -1,7 +1,7 @@
 Node.js - Spotify Playlist Data
 =====================
 
-Get all data from a **public** Spotify Playlist without authentication. Based on [node-spotify-data](https://github.com/MiniGod/node-spotify-data).
+Get all data from both **public or private** Spotify Playlists without authentication. Based on [node-spotify-data](https://github.com/MiniGod/node-spotify-data).
 
 ##### Dependencies
 
