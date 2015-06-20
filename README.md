@@ -1,7 +1,8 @@
 Node.js - Spotify Playlist Data
 =====================
 
-Get all data from both **public or private** Spotify Playlists without authentication. Based on [node-spotify-data](https://github.com/MiniGod/node-spotify-data).
+Get all data from both **public or private** Spotify Playlists without authentication. Based on [node-spotify-data](https://github.com/MiniGod/node-spotify-data).  
+Due the widged limitation of Spotify, it is only able to load the first 200 songs.
 
 ##### Dependencies
 
@@ -14,12 +15,12 @@ This project depends on [restler](https://github.com/danwrong/restler) to make H
 ## Usage
 
 ```javascript
-var spotify = require('spotify-playlist');
+var spotifyPlaylist = require('spotify-playlist');
 
 var callback = function(err, result) {
     console.log(result.playlist.tracks);
 }
 
-spotify.lookup('spotify:user:spotify:playlist:6RU5ydGPBQ8fJKWAqMj8Hg', callback); //Normal spotify URI.
-spotify.playlist('syknyk', '0Idyatn0m08Y48tiOovNd9', console.log); //Using username and playlist ID as parameters.
+spotifyPlaylist.playlistUri('spotify:user:spotify:playlist:6RU5ydGPBQ8fJKWAqMj8Hg', callback); //Normal spotify URI.
+spotifyPlayList.playlist('syknyk', '0Idyatn0m08Y48tiOovNd9', console.log); //Using username and playlist ID as parameters.
 ```

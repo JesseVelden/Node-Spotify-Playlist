@@ -4,21 +4,22 @@ var util = require('util');
 var rest = require('restler');
 var cheerio = require('cheerio');
 
-/////////////////////////////////
+
 var Spotify = module.exports = {};
 Spotify.uri = require('spotify-uri');
-/////////////////////////////////
+
 
 // Spotify data urls
 Spotify.url = {
 	playlist: 'https://embed.spotify.com/?uri=spotify:user:%s:playlist:%s'
 }
+
 /**
- * Lookup a spotify uri. Supports track, album, artist, playlist.
+ * Lookup a spotify playlist uri.
  * @param  {String}   uri Spotify URI to lookup
  * @param  {Function} cb  Callback
  */
-Spotify.lookup = function(uri, extras, cb) {
+Spotify.playlistUri = function(uri, extras, cb) {
 	var parsed = typeof uri === 'string' ? Spotify.uri.parse(uri) : uri;
 
 	// Playlist
@@ -31,10 +32,6 @@ Spotify.lookup = function(uri, extras, cb) {
 	}
 }
 
-///////////////////////////////
-// MORE ADVANCED STUFF BELOW //
-///////////////////////////////
-
 /**
  * Get tracks in a playlist. Same format as an album
  * @param  {String}   user User/creator of this playlist
@@ -42,12 +39,12 @@ Spotify.lookup = function(uri, extras, cb) {
  * @param  {Function}      cb
  * @return {Array}         Array of tracks in playlist
  */
+
 Spotify.playlist = function(user, id, cb) {
 	var tracks = [];
 
 	var track = null;
 
-	
 	var req = rest.get(util.format(Spotify.url.playlist, user, id)).on('complete', function(result) {
 		if (result instanceof Error) {
     		cb('Error: ', result.message);
