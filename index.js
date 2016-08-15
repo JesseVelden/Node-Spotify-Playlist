@@ -43,8 +43,6 @@ Spotify.playlistUri = function(uri, extras, cb) {
 Spotify.playlist = function(user, id, cb) {
 	var tracks = [];
 
-	var track = null;
-
 	var req = rest.get(util.format(Spotify.url.playlist, user, id)).on('complete', function(result) {
 		if (result instanceof Error) {
     		cb('Error: ', result.message);
@@ -53,27 +51,17 @@ Spotify.playlist = function(user, id, cb) {
 			var tracks = [];
 			var $ = cheerio.load(result);
 			if($('#text').text() == ""){ //No error =D
-				$('li[rel="track"]').each(function(i, el) {
-					el = $(el);
+				$('.track-row').each(function(i, el) {
 					var track = {
-						href: Spotify.uri.formatURI({type:'track',id: el.attr('data-track')}),
-						duration: parseInt(el.attr('data-duration-ms')),
-						cover: el.attr('data-ca'),
-						artists: []
+						"name": $(this).attr('data-name'),
+						"href": $(this).attr('data-uri'),
+						"artists": $(this).attr('data-artists').split(", "),
+						"duration": parseInt($(this).attr('data-duration-ms')),
+						"cover-640": $(this).attr('data-size-640'),
+						"cover-300": $(this).attr('data-size-300'),
+						"cover-64": $(this).attr('data-size-64'),
+						"number": parseInt($(this).attr('data-position'))
 					};
-
-					track.name = el.find('li.track-title').attr('rel').replace(/^\d*\. /, '');
-					track.id = el.attr('data-track');
-
-					var artists = el.find('li.artist').attr('rel').split(', ');
-
-					for(var i = 0; i < artists.length; i++){
-						track.artists[i] = artists[i];
-						/*track.artists.push({
-							//href: '*DEPRECATED*: embed.spotify.com does not support this anymore. See index.js for original code.', //Spotify.uri.formatURI({type:'artist',id: artistel.attr('class').match(/[\w]{22}/)[0]})
-							name: artists[i]
-						});*/
-					}
 
 					tracks.push(track);
 				});
@@ -82,7 +70,7 @@ Spotify.playlist = function(user, id, cb) {
 					playlist: {
 						// spotify-uri supports parsing of playlist, but not formating -.-
 						'playlist-id': ['spotify', 'user', user, 'playlist', id].join(':'),
-						title: $('div.title-content').text(),
+						title: $('.context-name').text().split(" by")[0].replace(/ /g, ""),
 						tracks: tracks,
 					},
 					info: {
