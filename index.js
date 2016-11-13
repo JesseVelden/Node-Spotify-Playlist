@@ -11,7 +11,7 @@ Spotify.uri = require('spotify-uri');
 
 // Spotify data urls
 Spotify.url = {
-	playlist: 'https://embed.spotify.com/?uri=spotify:user:%s:playlist:%s'
+	playlist: 'https://open.spotify.com/embed?uri=spotify%3Auser%3A%s%3Aplaylist%3A%s'
 }
 
 /**
