@@ -78,9 +78,9 @@ Spotify.playlist = function(user, id, cb) {
 					}
 				}
 
-				cb('Result:', playlist);
+				cb(null, playlist);
 			}else{
-				cb('Error:', 'This playlist is empty or does not exsist');
+				cb('Error: This playlist is empty or does not exist');
 			}
 		}
 	});
