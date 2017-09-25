@@ -2,7 +2,7 @@ Node.js - Spotify Playlist Data
 =====================
 
 Get all data from both **public or private** Spotify Playlists without authentication. Based on [node-spotify-data](https://github.com/MiniGod/node-spotify-data).  
-Due the widged limitation of Spotify, it is only able to load the first 200 songs.
+Due the widget limitation of Spotify, it is only able to load the first 200 songs.
 
 ##### Dependencies
 
